@@ -1,5 +1,5 @@
 Login
-curl -i -k -H "Accept:application/*+xml;version=5.5" -u 'test1@fallfish:123.com' -X POST https://192.168.80.32/api/sessions
+curl -i -k -H "Accept:application/*+xml;version=5.5" -u 'test1@fallfish:123.com' -X POST https://utm.fallage.com/api/sessions
 HTTP/1.1 200 OK
 Date: Mon, 21 Mar 2016 09:35:54 GMT
 Vary: Accept-Encoding
@@ -19,13 +19,13 @@ Content-Length: 1286
 </Session>
 
 List All Organizations
-curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://192.168.80.32/api/org
+curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://utm.fallage.com/api/org
 <OrgList xmlns="http://www.vmware.com/vcloud/v1.5" type="application/vnd.vmware.vcloud.orgList+xml" href="https://utm.fallage.com/api/org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://utm.fallage.com/api/v1.5/schema/master.xsd">
     <Org type="application/vnd.vmware.vcloud.org+xml" name="fallfish" href="https://utm.fallage.com/api/org/2bf84a53-a37f-4b86-815e-4641f5508544"/>
 </OrgList>
 
 Get Specific Organization
-curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://192.168.80.32/api/org/2bf84a53-a37f-4b86-815e-4641f5508544
+curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://utm.fallage.com/api/org/2bf84a53-a37f-4b86-815e-4641f5508544
 <Org xmlns="http://www.vmware.com/vcloud/v1.5" name="fallfish" id="urn:vcloud:org:2bf84a53-a37f-4b86-815e-4641f5508544" type="application/vnd.vmware.vcloud.org+xml" href="https://utm.fallage.com/api/org/2bf84a53-a37f-4b86-815e-4641f5508544" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://utm.fallage.com/api/v1.5/schema/master.xsd">
     <Link rel="down" type="application/vnd.vmware.vcloud.vdc+xml" name="fallfish" href="https://utm.fallage.com/api/vdc/a371a699-5470-482c-b480-77d19b8b33ed"/>
     <Link rel="down" type="application/vnd.vmware.vcloud.tasksList+xml" href="https://utm.fallage.com/api/tasksList/2bf84a53-a37f-4b86-815e-4641f5508544"/>
@@ -44,39 +44,38 @@ curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:
 </Org>
 
 Get Catalog
-curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://192.168.80.32/api/catalog/eaa9c821-e5c9-46cb-911c-de8e994afe09
-<Catalog xmlns="http://www.vmware.com/vcloud/v1.5" name="iso" id="urn:vcloud:catalog:eaa9c821-e5c9-46cb-911c-de8e994afe09" type="application/vnd.vmware.vcloud.catalog+xml" href="https://utm.fallage.com/api/catalog/eaa9c821-e5c9-46cb-911c-de8e994afe09" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://utm.fallage.com/api/v1.5/schema/master.xsd">
+curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://utm.fallage.com/api/catalog/c628966a-f6d7-467a-b650-801802b6f389
+<Catalog xmlns="http://www.vmware.com/vcloud/v1.5" name="template" id="urn:vcloud:catalog:c628966a-f6d7-467a-b650-801802b6f389" type="application/vnd.vmware.vcloud.catalog+xml" href="https://utm.fallage.com/api/catalog/c628966a-f6d7-467a-b650-801802b6f389" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://utm.fallage.com/api/v1.5/schema/master.xsd">
     <Link rel="up" type="application/vnd.vmware.vcloud.org+xml" href="https://utm.fallage.com/api/org/2bf84a53-a37f-4b86-815e-4641f5508544"/>
-    <Link rel="down" type="application/vnd.vmware.vcloud.metadata+xml" href="https://utm.fallage.com/api/catalog/eaa9c821-e5c9-46cb-911c-de8e994afe09/metadata"/>
-    <Link rel="add" type="application/vnd.vmware.vcloud.catalogItem+xml" href="https://utm.fallage.com/api/catalog/eaa9c821-e5c9-46cb-911c-de8e994afe09/catalogItems"/>
-    <Link rel="add" type="application/vnd.vmware.vcloud.media+xml" href="https://utm.fallage.com/api/catalog/eaa9c821-e5c9-46cb-911c-de8e994afe09/action/upload"/>
-    <Link rel="add" type="application/vnd.vmware.vcloud.uploadVAppTemplateParams+xml" href="https://utm.fallage.com/api/catalog/eaa9c821-e5c9-46cb-911c-de8e994afe09/action/upload"/>
-    <Link rel="copy" type="application/vnd.vmware.vcloud.copyOrMoveCatalogItemParams+xml" href="https://utm.fallage.com/api/catalog/eaa9c821-e5c9-46cb-911c-de8e994afe09/action/copy"/>
-    <Link rel="move" type="application/vnd.vmware.vcloud.copyOrMoveCatalogItemParams+xml" href="https://utm.fallage.com/api/catalog/eaa9c821-e5c9-46cb-911c-de8e994afe09/action/move"/>
-    <Link rel="add" type="application/vnd.vmware.vcloud.captureVAppParams+xml" href="https://utm.fallage.com/api/catalog/eaa9c821-e5c9-46cb-911c-de8e994afe09/action/captureVApp"/>
+    <Link rel="down" type="application/vnd.vmware.vcloud.metadata+xml" href="https://utm.fallage.com/api/catalog/c628966a-f6d7-467a-b650-801802b6f389/metadata"/>
+    <Link rel="add" type="application/vnd.vmware.vcloud.catalogItem+xml" href="https://utm.fallage.com/api/catalog/c628966a-f6d7-467a-b650-801802b6f389/catalogItems"/>
+    <Link rel="add" type="application/vnd.vmware.vcloud.media+xml" href="https://utm.fallage.com/api/catalog/c628966a-f6d7-467a-b650-801802b6f389/action/upload"/>
+    <Link rel="add" type="application/vnd.vmware.vcloud.uploadVAppTemplateParams+xml" href="https://utm.fallage.com/api/catalog/c628966a-f6d7-467a-b650-801802b6f389/action/upload"/>
+    <Link rel="copy" type="application/vnd.vmware.vcloud.copyOrMoveCatalogItemParams+xml" href="https://utm.fallage.com/api/catalog/c628966a-f6d7-467a-b650-801802b6f389/action/copy"/>
+    <Link rel="move" type="application/vnd.vmware.vcloud.copyOrMoveCatalogItemParams+xml" href="https://utm.fallage.com/api/catalog/c628966a-f6d7-467a-b650-801802b6f389/action/move"/>
+    <Link rel="add" type="application/vnd.vmware.vcloud.captureVAppParams+xml" href="https://utm.fallage.com/api/catalog/c628966a-f6d7-467a-b650-801802b6f389/action/captureVApp"/>
     <CatalogItems>
-        <CatalogItem type="application/vnd.vmware.vcloud.catalogItem+xml" name="CentOS-6.5-x86_64-bin-DVD.iso" id="17170868-77d8-43af-b166-78d7e120c750" href="https://utm.fallage.com/api/catalogItem/17170868-77d8-43af-b166-78d7e120c750"/>
-        <CatalogItem type="application/vnd.vmware.vcloud.catalogItem+xml" name="cn_windows_7_ultimate_with_sp1_x64_dvd_u_677408（64位sp1）.iso" id="49fea4c4-1b3b-4554-a5ea-95f14102cd71" href="https://utm.fallage.com/api/catalogItem/49fea4c4-1b3b-4554-a5ea-95f14102cd71"/>
+        <CatalogItem type="application/vnd.vmware.vcloud.catalogItem+xml" name="WIN7模板" id="3b861659-1019-4464-b816-301fe138dc22" href="https://utm.fallage.com/api/catalogItem/3b861659-1019-4464-b816-301fe138dc22"/>
     </CatalogItems>
     <IsPublished>false</IsPublished>
-    <DateCreated>2015-11-26T02:55:26.269+08:00</DateCreated>
-    <VersionNumber>5</VersionNumber>
+    <DateCreated>2015-11-30T15:46:09.972+08:00</DateCreated>
+    <VersionNumber>6</VersionNumber>
 </Catalog>
 
 Get CatalogItem
-curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://192.168.80.32/api/catalogItem/49fea4c4-1b3b-4554-a5ea-95f14102cd71
-<CatalogItem xmlns="http://www.vmware.com/vcloud/v1.5" size="4467982336" name="CentOS-6.5-x86_64-bin-DVD.iso" id="urn:vcloud:catalogitem:17170868-77d8-43af-b166-78d7e120c750" type="application/vnd.vmware.vcloud.catalogItem+xml" href="https://utm.fallage.com/api/catalogItem/17170868-77d8-43af-b166-78d7e120c750" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://utm.fallage.com/api/v1.5/schema/master.xsd">
-    <Link rel="up" type="application/vnd.vmware.vcloud.catalog+xml" href="https://utm.fallage.com/api/catalog/eaa9c821-e5c9-46cb-911c-de8e994afe09"/>
-    <Link rel="down" type="application/vnd.vmware.vcloud.metadata+xml" href="https://utm.fallage.com/api/catalogItem/17170868-77d8-43af-b166-78d7e120c750/metadata"/>
-    <Link rel="edit" type="application/vnd.vmware.vcloud.catalogItem+xml" href="https://utm.fallage.com/api/catalogItem/17170868-77d8-43af-b166-78d7e120c750"/>
-    <Link rel="remove" href="https://utm.fallage.com/api/catalogItem/17170868-77d8-43af-b166-78d7e120c750"/>
-    <Entity type="application/vnd.vmware.vcloud.media+xml" name="CentOS-6.5-x86_64-bin-DVD.iso" href="https://utm.fallage.com/api/media/784a8976-c499-4922-a414-d562a8e93a0c"/>
-    <DateCreated>2015-12-08T09:41:55.940+08:00</DateCreated>
+curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://utm.fallage.com/api/catalogItem/3b861659-1019-4464-b816-301fe138dc22
+<CatalogItem xmlns="http://www.vmware.com/vcloud/v1.5" size="0" name="WIN7模板" id="urn:vcloud:catalogitem:3b861659-1019-4464-b816-301fe138dc22" type="application/vnd.vmware.vcloud.catalogItem+xml" href="https://utm.fallage.com/api/catalogItem/3b861659-1019-4464-b816-301fe138dc22" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://utm.fallage.com/api/v1.5/schema/master.xsd">
+    <Link rel="up" type="application/vnd.vmware.vcloud.catalog+xml" href="https://utm.fallage.com/api/catalog/c628966a-f6d7-467a-b650-801802b6f389"/>
+    <Link rel="down" type="application/vnd.vmware.vcloud.metadata+xml" href="https://utm.fallage.com/api/catalogItem/3b861659-1019-4464-b816-301fe138dc22/metadata"/>
+    <Link rel="edit" type="application/vnd.vmware.vcloud.catalogItem+xml" href="https://utm.fallage.com/api/catalogItem/3b861659-1019-4464-b816-301fe138dc22"/>
+    <Link rel="remove" href="https://utm.fallage.com/api/catalogItem/3b861659-1019-4464-b816-301fe138dc22"/>
+    <Entity type="application/vnd.vmware.vcloud.vAppTemplate+xml" name="WIN7模板" href="https://utm.fallage.com/api/vAppTemplate/vappTemplate-984d71f9-d5f8-493c-81d1-821a72fe347e"/>
+    <DateCreated>2015-12-01T09:47:51.414+08:00</DateCreated>
     <VersionNumber>1</VersionNumber>
 </CatalogItem>
 
 Retrieve Deployment Information From the VDC / List Org vDC
-curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://192.168.80.32/api/vdc/a371a699-5470-482c-b480-77d19b8b33ed
+curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://utm.fallage.com/api/vdc/a371a699-5470-482c-b480-77d19b8b33ed
 <Vdc xmlns="http://www.vmware.com/vcloud/v1.5" status="1" name="fallfish" id="urn:vcloud:vdc:a371a699-5470-482c-b480-77d19b8b33ed" type="application/vnd.vmware.vcloud.vdc+xml" href="https://utm.fallage.com/api/vdc/a371a699-5470-482c-b480-77d19b8b33ed" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://utm.fallage.com/api/v1.5/schema/master.xsd">
     <Link rel="up" type="application/vnd.vmware.vcloud.org+xml" href="https://utm.fallage.com/api/org/2bf84a53-a37f-4b86-815e-4641f5508544"/>
     <Link rel="down" type="application/vnd.vmware.vcloud.metadata+xml" href="https://utm.fallage.com/api/vdc/a371a699-5470-482c-b480-77d19b8b33ed/metadata"/>
@@ -114,7 +113,11 @@ curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:
     </ComputeCapacity>
     <ResourceEntities>
         <ResourceEntity type="application/vnd.vmware.vcloud.vAppTemplate+xml" name="WIN7模板" href="https://utm.fallage.com/api/vAppTemplate/vappTemplate-984d71f9-d5f8-493c-81d1-821a72fe347e"/>
+        <ResourceEntity type="application/vnd.vmware.vcloud.vApp+xml" name="hwanginsitein1" href="https://utm.fallage.com/api/vApp/vapp-bab5e3d7-8d3c-4e24-9422-69302951ea2c"/>
+        <ResourceEntity type="application/vnd.vmware.vcloud.vApp+xml" name="hwanginsitein2" href="https://utm.fallage.com/api/vApp/vapp-8bd80eea-ed34-4eea-ab03-40d7f31dc826"/>
+        <ResourceEntity type="application/vnd.vmware.vcloud.vApp+xml" name="Linux FTP server" href="https://utm.fallage.com/api/vApp/vapp-615cebde-303e-4e35-87d3-01b95640db7e"/>
         <ResourceEntity type="application/vnd.vmware.vcloud.vApp+xml" name="vApp_tolly.tu_1" href="https://utm.fallage.com/api/vApp/vapp-e44b6b3d-7991-4f76-9b0c-a2289498f730"/>
+        <ResourceEntity type="application/vnd.vmware.vcloud.vApp+xml" name="hwanginsitein" href="https://utm.fallage.com/api/vApp/vapp-48a3869c-990c-4d5f-b538-ea41a602624c"/>
         <ResourceEntity type="application/vnd.vmware.vcloud.media+xml" name="CentOS-6.5-x86_64-bin-DVD.iso" href="https://utm.fallage.com/api/media/784a8976-c499-4922-a414-d562a8e93a0c"/>
         <ResourceEntity type="application/vnd.vmware.vcloud.media+xml" name="cn_windows_7_ultimate_with_sp1_x64_dvd_u_677408（64位sp1）.iso" href="https://utm.fallage.com/api/media/2e9c7afa-7981-4907-9cc5-160690d783dd"/>
     </ResourceEntities>
@@ -140,7 +143,7 @@ curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:
 </Vdc>
 
 Get vAppTemplate
-curl -i -k -H "Accept:application/*+xml;version=1.5" -H "x-vcloud-authorization: nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://192.168.80.32/api/vAppTemplate/vappTemplate-984d71f9-d5f8-493c-81d1-821a72fe347e
+curl -i -k -H "Accept:application/*+xml;version=1.5" -H "x-vcloud-authorization: nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://utm.fallage.com/api/vAppTemplate/vappTemplate-984d71f9-d5f8-493c-81d1-821a72fe347e
 <VAppTemplate xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" ovfDescriptorUploaded="true" goldMaster="false" status="8" name="WIN7模板" id="urn:vcloud:vapptemplate:984d71f9-d5f8-493c-81d1-821a72fe347e" type="application/vnd.vmware.vcloud.vAppTemplate+xml" href="https://utm.fallage.com/api/vAppTemplate/vappTemplate-984d71f9-d5f8-493c-81d1-821a72fe347e" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.dmtf.org/ovf/envelope/1 http://schemas.dmtf.org/ovf/envelope/1/dsp8023_1.1.0.xsd http://www.vmware.com/vcloud/v1.5 http://utm.fallage.com/api/v1.5/schema/master.xsd">
     <Link rel="up" type="application/vnd.vmware.vcloud.vdc+xml" href="https://utm.fallage.com/api/vdc/a371a699-5470-482c-b480-77d19b8b33ed"/>
     <Link rel="catalogItem" type="application/vnd.vmware.vcloud.catalogItem+xml" href="https://utm.fallage.com/api/catalogItem/3b861659-1019-4464-b816-301fe138dc22"/>
@@ -241,19 +244,19 @@ deploy_request
             networkName="vAppNetwork">
             <Configuration>
                <ParentNetwork
-                  href="https://192.168.80.32/api/network/9590e3f9-33d3-4c42-9d2f-88c1b3957dc5" />
+                  href="https://utm.fallage.com/api/network/9590e3f9-33d3-4c42-9d2f-88c1b3957dc5" />
                <FenceMode>bridged</FenceMode>
             </Configuration>
          </NetworkConfig>
       </NetworkConfigSection>
    </InstantiationParams>
    <Source
-      href="https://192.168.80.32/api/vAppTemplate/vappTemplate-984d71f9-d5f8-493c-81d1-821a72fe347e" />
+      href="https://utm.fallage.com/api/vAppTemplate/vappTemplate-984d71f9-d5f8-493c-81d1-821a72fe347e" />
 </InstantiateVAppTemplateParams>
 
 
 Instantiate from vAppTemplate
-curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -H "Content-Type:application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml" -X POST https://192.168.80.32/api/vdc/a371a699-5470-482c-b480-77d19b8b33ed/action/instantiateVAppTemplate -d @deploy_request
+curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -H "Content-Type:application/vnd.vmware.vcloud.instantiateVAppTemplateParams+xml" -X POST https://utm.fallage.com/api/vdc/a371a699-5470-482c-b480-77d19b8b33ed/action/instantiateVAppTemplate -d @deploy_request
 
 HTTP/1.1 201 Created
 Date: Tue, 22 Mar 2016 13:43:07 GMT
@@ -291,7 +294,7 @@ Content-Length: 3250
 </VApp>
 
 Get Newly Deployed vApp
-curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://192.168.80.32/api/vApp/vapp-8bd80eea-ed34-4eea-ab03-40d7f31dc826
+curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://utm.fallage.com/api/vApp/vapp-8bd80eea-ed34-4eea-ab03-40d7f31dc826
 <?xml version="1.0" encoding="UTF-8"?>
 <VApp xmlns="http://www.vmware.com/vcloud/v1.5" ovfDescriptorUploaded="true" deployed="false" status="0" name="Linux FTP server" id="urn:vcloud:vapp:615cebde-303e-4e35-87d3-01b95640db7e" type="application/vnd.vmware.vcloud.vApp+xml" href="https://utm.fallage.com/api/vApp/vapp-615cebde-303e-4e35-87d3-01b95640db7e" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://utm.fallage.com/api/v1.5/schema/master.xsd">
     <Link rel="down" type="application/vnd.vmware.vcloud.vAppNetwork+xml" name="net_vdc" href="https://utm.fallage.com/api/network/3cfcb2f1-dd75-42f6-ae93-e1a4964d8cc1"/>
@@ -318,11 +321,11 @@ curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:
 </VApp>
 
 Power On vApp
-curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X POST https://192.168.80.32/api/vApp/vapp-8bd80eea-ed34-4eea-ab03-40d7f31dc826/power/action/powerOn
+curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X POST https://utm.fallage.com/api/vApp/vapp-8bd80eea-ed34-4eea-ab03-40d7f31dc826/power/action/powerOn
 
 
 Get vApp PowerOn Task
-curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://192.168.80.32/api/task/94fdbdbc-8c0c-42eb-89e6-b3f243c8d477
+curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X GET https://utm.fallage.com/api/task/94fdbdbc-8c0c-42eb-89e6-b3f243c8d477
 <Task xmlns="http://www.vmware.com/vcloud/v1.5" status="error" startTime="2016-03-21T21:30:44.714+08:00" serviceNamespace="com.vmware.vcloud" operationName="vdcInstantiateVapp" operation="Created Virtual Application Linux FTP server(615cebde-303e-4e35-87d3-01b95640db7e)" expiryTime="2016-06-19T21:30:44.714+08:00" endTime="2016-03-21T21:30:45.363+08:00" cancelRequested="false" name="task" id="urn:vcloud:task:94fdbdbc-8c0c-42eb-89e6-b3f243c8d477" type="application/vnd.vmware.vcloud.task+xml" href="https://utm.fallage.com/api/task/94fdbdbc-8c0c-42eb-89e6-b3f243c8d477" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vmware.com/vcloud/v1.5 http://utm.fallage.com/api/v1.5/schema/master.xsd">
     <Owner type="application/vnd.vmware.vcloud.vApp+xml" name="Linux FTP server" href="https://utm.fallage.com/api/vApp/vapp-615cebde-303e-4e35-87d3-01b95640db7e"/>
     <Error minorErrorCode="BAD_REQUEST" message="The VCD entity network &quot;VM Network&quot; does not exist." majorErrorCode="400"/>
@@ -332,6 +335,6 @@ curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:
     <Details>  The VCD entity network "VM Network" does not exist.</Details>
 </Task>
 
-curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X POST https://192.168.80.32/api/vApp/vapp-48a3869c-990c-4d5f-b538-ea41a602624c/power/action/undeploy
+curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X POST https://utm.fallage.com/api/vApp/vapp-48a3869c-990c-4d5f-b538-ea41a602624c/power/action/undeploy
 
-curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X POST https://192.168.80.32/api/vApp/vm-c27ae7a6-fe41-4073-87d3-49f0a9731af1/screen/action/acquireTicket
+curl -i -k -H "Accept:application/*+xml;version=5.5" -H "x-vcloud-authorization:nw2GV6CabqeZD2Pzz523yGxMRqpj1MzbgKFkveTO2a0=" -X POST https://utm.fallage.com/api/vApp/vm-c27ae7a6-fe41-4073-87d3-49f0a9731af1/screen/action/acquireTicket
