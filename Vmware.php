@@ -153,7 +153,6 @@ class Vmware {
         $this->curlOptions($ch,$curlArray);
         $response = curl_exec($ch);
         $simpleXML = simplexml_load_string($response);
-        p($simpleXML);
         $attributes = $simpleXML->attributes();
         $status = (string)$attributes['status'];
         if($status == "running"){
@@ -188,7 +187,7 @@ $vdcUrl = $vmware->getVdcUrl();
 $vApps = $vmware->listVApps($vdcUrl);
 var_dump($vApps);
 $vAppXML = $vmware->getVAppByAttr($vApps,["key"=>"name","val"=>"vApp_tolly.tu_1"],"href");
-$vmware->powerOn($vAppXML,['key'=>"name","val"=>"centos"]);
+//$vmware->powerOff($vAppXML,['key'=>"name","val"=>"win7"]);
 
 function p($var){
     echo "<pre>";
