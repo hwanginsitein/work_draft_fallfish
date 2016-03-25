@@ -187,7 +187,7 @@ $vdcUrl = $vmware->getVdcUrl();
 $vApps = $vmware->listVApps($vdcUrl);
 var_dump($vApps);
 $vAppXML = $vmware->getVAppByAttr($vApps,["key"=>"name","val"=>"vApp_tolly.tu_1"],"href");
-//$vmware->powerOff($vAppXML,['key'=>"name","val"=>"win7"]);
+$vmware->powerOff($vAppXML,['key'=>"name","val"=>"平台测试服务器"]);
 
 function p($var){
     echo "<pre>";
