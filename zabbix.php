@@ -1,5 +1,4 @@
 <?php
-
 class ZabbixApi {
     private $headers;
     private $url;
@@ -240,56 +239,60 @@ $zabbix = new ZabbixApi($user, $password, $url, $header);
 $sessionid = $zabbix->userLogin();
 $objectids = array("13601", "13500");
 $eg = $zabbix->eventGet($sessionid, $objectids, 1);
-print_r($eg);
-die("***");
+echo json_encode($eg);
+exit;
 $eventids = array(20, 96);
 $ea = $zabbix->eventAcknowledge($sessionid, $eventids);
-print_r($ea);
-die("***");
+var_dump($ea);
+var_dump("***");
 //==================================================
 //=====================平台用=============================
-//$user = "Admin";
-//$password = "zabbix";
-//$url = "http://192.168.80.92/zabbix/api_jsonrpc.php";
-//$header = "Content-Type:application/json";
-//$ip = "101.81.67.74";
-//$hgn = time();//群组名（uid_云账号id）
+$user = "Admin";
+$password = "zabbix";
+$url = "http://192.168.80.92/zabbix/api_jsonrpc.php";
+$header = "Content-Type:application/json";
+$ip = "101.81.67.74";
+$hgn = time();//群组名（uid_云账号id）
 //
-//$jk = array(
-//	array("name"=>"服务器存活","key"=>"agent.ping"),
-//	array("name"=>"网络流入速率","key"=>"net.if.in[ens32]"),
-//	array("name"=>"网络流出速率","key"=>"net.if.out[ens32]"),
-//	array("name"=>"TCP活动状态","key"=>"net.tcp.service[tcp,127.0.0.1,80]"),
-//	array("name"=>"系统平均负载","key"=>"system.cpu.load[percpu,avg1]"),
-//	array("name"=>"CPU使用率","key"=>"system.cpu.util[,user,avg1]"),
-//	array("name"=>"磁盘IO读","key"=>"vfs.dev.read[all,sps,avg1]"),
-//	array("name"=>"磁盘IO写","key"=>"vfs.dev.write[all,sps,avg1]"),
-//	array("name"=>"磁盘使用率","key"=>"vfs.fs.size[/,free]"),
-//	array("name"=>"内存使用率","key"=>"vm.memory.size[free]"),
-//);
+$jk = array(
+    array("name"=>"服务器存活","key"=>"agent.ping"),
+    array("name"=>"网络流入速率","key"=>"net.if.in[ens32]"),
+    array("name"=>"网络流出速率","key"=>"net.if.out[ens32]"),
+    array("name"=>"TCP活动状态","key"=>"net.tcp.service[tcp,127.0.0.1,80]"),
+    array("name"=>"系统平均负载","key"=>"system.cpu.load[percpu,avg1]"),
+    array("name"=>"CPU使用率","key"=>"system.cpu.util[,user,avg1]"),
+    array("name"=>"磁盘IO读","key"=>"vfs.dev.read[all,sps,avg1]"),
+    array("name"=>"磁盘IO写","key"=>"vfs.dev.write[all,sps,avg1]"),
+    array("name"=>"磁盘使用率","key"=>"vfs.fs.size[/,free]"),
+    array("name"=>"内存使用率","key"=>"vm.memory.size[free]"),
+);
 //
 //echo(date("Y-m-d H:i:s",1458127890));
-//die();
-//
-//$zabbix = new ZabbixApi($user,$password,$url,$header);
-//$sessionid = $zabbix->userLogin();
-//$gd = $zabbix->hostgroupCreate($sessionid,$hgn);
-//$hcd = $zabbix->hostCreate($sessionid,$ip,$gd['result']['groupids'][0]);
-//$hud = $zabbix->hostUpdate($sessionid,$hcd['result']['hostids'][0],1);//禁用主机
-//$hg = $zabbix->hostinterfaceGet($sessionid,$hcd['result']['hostids'][0]);
-////=====================监控和图表========================
-//foreach($jk as $v){
-//	$ic = $zabbix->itemCreate($sessionid,$hcd['result']['hostids'][0],$v['name'],$v['key'],$hg['result'][0]['interfaceid'],7);
-//	$gc = $zabbix->graphCreate($sessionid,$ic['result']['itemids'][0],$v['name']);
-//}
-////=============================================
-//$hud = $zabbix->hostUpdate($sessionid,$hcd['result']['hostids'][0],0);//开启主机
-//
-////======================报警=======================
-//$description = "CPU使用率";
-//$expression = "{101.81.67.74:system.cpu.util[,user,avg1].avg(5,5)}>80";
-//$tc = $zabbix->triggerCreate($sessionid,$description,$expression);
-////=============================================
+
+
+$zabbix = new ZabbixApi($user,$password,$url,$header);
+$sessionid = $zabbix->userLogin();
+$gd = $zabbix->hostgroupCreate($sessionid,$hgn);
+$hcd = $zabbix->hostCreate($sessionid,$ip,$gd['result']['groupids'][0]);
+var_dump($hcd);exit;
+$hud = $zabbix->hostUpdate($sessionid,$hcd['result']['hostids'][0],1);//禁用主机
+$hg = $zabbix->hostinterfaceGet($sessionid,$hcd['result']['hostids'][0]);
+//=====================监控和图表========================
+foreach($jk as $v){
+    $ic = $zabbix->itemCreate($sessionid,$hcd['result']['hostids'][0],$v['name'],$v['key'],$hg['result'][0]['interfaceid'],7);
+    $gc = $zabbix->graphCreate($sessionid,$ic['result']['itemids'][0],$v['name']);
+}
+echo "gc";
+var_dump($gc);
+echo "gc";
+//=============================================
+$hud = $zabbix->hostUpdate($sessionid,$hcd['result']['hostids'][0],0);//开启主机
+
+//======================报警=======================
+$description = "CPU使用率";
+$expression = "{101.81.67.74:system.cpu.util[,user,avg1].avg(5,5)}>80";
+$tc = $zabbix->triggerCreate($sessionid,$description,$expression);
+//=============================================
 //==================================================
 print_r($tc);
 die("***");
