@@ -106,6 +106,29 @@ class ZabbixApi {
         $data = json_decode($ot[1], true);
         return $data;
     }
+    function hostGet($sessionid) {
+        $d = array(
+            "jsonrpc" => "2.0",
+            "method" => "host.get",
+            "params" => array(
+                "output" => "extend",
+                /*
+                "filter"=>array(
+                    "host" => array(
+                        "Zabbix server",
+                        "Linux server"
+                    )
+                )
+                 */
+            ),
+            "auth" => $sessionid,
+            "id" => 1,
+        );
+        $output = $this->doCurl($d);
+        $ot = explode("/json", $output);
+        $data = json_decode($ot[1], true);
+        return $data;
+    }
 
     function hostinterfaceGet($sessionid, $hid) {
         $d = array(
@@ -229,7 +252,11 @@ class ZabbixApi {
     }
 
 }
-
+function p($v){
+    echo "<pre>";
+    print_r($v);
+    echo "</pre>";
+}
 //========报警列表显示、定时查询报警信息并发送邮件========
 $user = "Admin";
 $password = "zabbix";
@@ -239,19 +266,15 @@ $zabbix = new ZabbixApi($user, $password, $url, $header);
 $sessionid = $zabbix->userLogin();
 $objectids = array("13601", "13500");
 $eg = $zabbix->eventGet($sessionid, $objectids, 1);
-echo json_encode($eg);
-exit;
+//echo json_encode($eg);
+//exit;
 $eventids = array(20, 96);
 $ea = $zabbix->eventAcknowledge($sessionid, $eventids);
-var_dump($ea);
-var_dump("***");
 //==================================================
 //=====================平台用=============================
-$user = "Admin";
-$password = "zabbix";
-$url = "http://192.168.80.92/zabbix/api_jsonrpc.php";
-$header = "Content-Type:application/json";
 $ip = "101.81.67.74";
+
+$ip = "101.81.67.61";
 $hgn = time();//群组名（uid_云账号id）
 //
 $jk = array(
@@ -267,34 +290,35 @@ $jk = array(
     array("name"=>"内存使用率","key"=>"vm.memory.size[free]"),
 );
 //
-//echo(date("Y-m-d H:i:s",1458127890));
-
-
-$zabbix = new ZabbixApi($user,$password,$url,$header);
-$sessionid = $zabbix->userLogin();
+$hosts = $zabbix->hostGet($sessionid);
+var_dump($hosts);exit;
 $gd = $zabbix->hostgroupCreate($sessionid,$hgn);
 $hcd = $zabbix->hostCreate($sessionid,$ip,$gd['result']['groupids'][0]);
-var_dump($hcd);exit;
+var_dump("hcd");
+var_dump($hcd);
 $hud = $zabbix->hostUpdate($sessionid,$hcd['result']['hostids'][0],1);//禁用主机
+var_dump($hud);
 $hg = $zabbix->hostinterfaceGet($sessionid,$hcd['result']['hostids'][0]);
 //=====================监控和图表========================
 foreach($jk as $v){
     $ic = $zabbix->itemCreate($sessionid,$hcd['result']['hostids'][0],$v['name'],$v['key'],$hg['result'][0]['interfaceid'],7);
     $gc = $zabbix->graphCreate($sessionid,$ic['result']['itemids'][0],$v['name']);
+    var_dump('ic');
+    var_dump($ic);
+    var_dump('gc');
+    var_dump($gc);
 }
-echo "gc";
-var_dump($gc);
-echo "gc";
+
 //=============================================
 $hud = $zabbix->hostUpdate($sessionid,$hcd['result']['hostids'][0],0);//开启主机
 
 //======================报警=======================
 $description = "CPU使用率";
-$expression = "{101.81.67.74:system.cpu.util[,user,avg1].avg(5,5)}>80";
+$expression = "{".$ip.":system.cpu.util[,user,avg1].avg(5,5)}>80";
 $tc = $zabbix->triggerCreate($sessionid,$description,$expression);
 //=============================================
 //==================================================
-print_r($tc);
+var_dump($tc);
 die("***");
 
 
