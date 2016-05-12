@@ -8,7 +8,7 @@ class Vmware {
     private function __construct() {
         
     }
-    static function getInstance($domain="https://utm.fallage.com"){
+    static function getInstance($domain="https://192.168.80.32"){
         if(isset(static::$instance)){
             echo "logined";
             return static::$instance;
@@ -18,7 +18,7 @@ class Vmware {
             return static::$instance;
         }
     }
-    public function login($user="test1",$org="fallfish",$password="123.com"){
+    public function login($user="administrator",$org="System",$password="123.com"){
         if(isset(static::$authorization)){
             echo "logined";return $this;
         }
@@ -66,7 +66,9 @@ class Vmware {
         }
     }
     public function getVdcUrl(){
+        //$requestUrl = 'https://192.168.80.32/api/org/2bf84a53-a37f-4b86-815e-4641f5508544';
         $requestUrl = self::$organizationUrl;
+        echo $requestUrl;exit;
         $ch = curl_init();
         $headerArr = ["Accept:application/*+xml;version=5.5","x-vcloud-authorization:".self::$authorization];
         $curlArray = [
@@ -74,6 +76,7 @@ class Vmware {
         ];
         $this->curlOptions($ch,$curlArray);
         $response = curl_exec($ch);
+        echo htmlentities($response);EXIT;
         $simpleXML = simplexml_load_string($response);
         $vdcUrl = $this->getXMLAttr($simpleXML->Link, ["key"=>"type","val"=>"application/vnd.vmware.vcloud.vdc+xml"], "href");
         return (string)$vdcUrl;
@@ -192,4 +195,5 @@ $vmware->powerOff($vAppXML,['key'=>"name","val"=>"平台测试服务器"]);
 function p($var){
     echo "<pre>";
     print_r($var);
+    echo "</pre>";
 }
